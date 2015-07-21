@@ -86,7 +86,7 @@ def main():
 
     try:
         repo_vars = RepoVars(module, path=path)
-    except RepoVars.InvalidPathError as e:
+    except RepoVars.InvalidPathError,e:
         module.fail_json(msg=e.message)
 
     return_vals = repo_vars.read_vars()
