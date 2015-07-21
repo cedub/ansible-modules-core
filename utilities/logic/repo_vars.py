@@ -64,13 +64,15 @@ class RepoVars(object):
             return {}
 
         try:
-            with open('%sansible.json' % self.path) as data_file:
-                try:
-                    return json.load(data_file)
-                except ValueError:
-                    return {}
+            f = open('%sansible.json' % self.path, 'r')
         except IOError:
             return {}
+        try:
+            return json.load(f.read())
+        except ValueError:
+            return {}
+        finally:
+            f.close()
 
 
 def main():
