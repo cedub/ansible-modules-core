@@ -71,8 +71,7 @@ class RepoVars(object):
             return json.load(f.read())
         except ValueError:
             return {}
-        finally:
-            f.close()
+        f.close()
 
 
 def main():
