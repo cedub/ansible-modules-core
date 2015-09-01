@@ -64,7 +64,8 @@ class RepoVars(object):
             return {}
 
         try:
-            f = open('%sansible.json' % self.path, 'r')
+            import os
+            f = open(os.path.join(self.path, 'ansible.json'), 'r')
         except IOError:
             return {}
         try:
@@ -91,10 +92,10 @@ def main():
 
     return_vals = repo_vars.read_vars()
 
-    # Always setting changed to true since the values will be set with each
-    # run of the playbook.  Perhaps this should just always be set to false
-    # since nothing is ever actually changed?
-    return_vals['changed'] = True
+    # Always setting changed to false since the values will be set with each
+    # run of the playbook.  It's decided this should just always be set to false
+    # since nothing is ever actually changed.
+    return_vals['changed'] = False
 
     module.exit_json(**return_vals)
 
